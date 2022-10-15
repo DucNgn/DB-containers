@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    ports:
+      - 27017:27017
+
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+  
+  mysql:
+    image: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - 3306:3306
+
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass password
+    ports:
+     - 6379:6379
+
